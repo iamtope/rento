@@ -1,0 +1,32 @@
+version: "3"
+services:
+    backend:
+        env_file:
+            - .env
+        environment:
+           - SFC_POSTGRES_DEV_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/sfc_dev_db
+           - REDIS_URL=redis://cache_sfc
+        build:
+            context: .
+            dockerfile: Dockerfile
+        ports:
+            - "3000:3000"
+        volumes:
+            - .:/src/app/
+            - /src/app/node_modules
+        command:
+            [
+                "bash",
+                "-c",
+                "while !</dev/tcp/db/5432; do sleep 1; done; npm run dev",
+            ]
+        depends_on:
+            - db
+            - redis
+    db:
+        env_file:
+            - .env
+        image: postgres
+    redis:
+        image: "redis:alpine"
+        container_name: cache_sfc

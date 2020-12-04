@@ -1,15 +1,15 @@
 {
-  "name": "sfc-backend",
+  "name": "rento-backend",
   "version": "1.0.0",
-  "description": "A backend service for streak for cash.",
+  "description": "A backend service for rento application",
   "engines": {
     "node": "12.x"
   },
   "main": "index.js",
   "scripts": {
-    "test": "cross-env SFC_NODE_ENV=test nyc --reporter=text --reporter=html mocha -c -r esm test/**/*.test.js --timeout 12000 --exit",
-    "pretest": "cross-env SFC_NODE_ENV=test npm run migrate:reset && cross-env SFC_NODE_ENV=test npm run migrate up && npm run lint",
-    "prestart": "cross-env SFC_NODE_ENV=production npm run migrate:up",
+    "test": "cross-env RENTO_NODE_ENV=test nyc --reporter=text --reporter=html mocha -c -r esm test/**/*.test.js --timeout 12000 --exit",
+    "pretest": "cross-env RENTO_NODE_ENV=test npm run migrate:reset && cross-env RENTO_NODE_ENV=test npm run migrate up && npm run lint",
+    "prestart": "cross-env RENTO_NODE_ENV=production npm run migrate:up",
     "start": "node -r esm .",
     "dev": "nodemon -r esm .",
     "migrate": "db-migrate --migrations-dir ./app/db/migrations",
@@ -25,18 +25,16 @@
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "coverage": "nyc cat ./coverage/lcov.info | coveralls"
   },
-  "author": "[addempsea, iamtope, teezyfortune]",
+  "author": "[iamtope]",
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/addempsea/streakforcash-api.git"
+    "url": "https://github.com/iamtope/rento"
   },
   "keywords": [
-    "sfc",
-    "fantasy",
-    "information",
-    "sport",
-    "game"
+    "ecommerce",
+    "rentage",
+    "P2P"
   ],
   "devDependencies": {
     "chai": "^4.2.0",

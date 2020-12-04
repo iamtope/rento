@@ -4,10 +4,11 @@ import test from './test';
 import production from './production';
 
 const {
-  SFC_SECRET: SECRET,
-  SFC_NODE_ENV: NODE_ENV
+  RENTO_SECRET: SECRET,
+  RENTO_NODE_ENV: NODE_ENV
 } = process.env;
 
+console.log(process.env);
 const currentEnv = {
   development,
   test,

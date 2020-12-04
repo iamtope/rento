@@ -1,15 +1,15 @@
 {
   "defaultEnv": {
-    "ENV": "SFC_NODE_ENV"
+    "ENV": "RENTO_NODE_ENV"
   },
   "development": {
-    "ENV": "SFC_POSTGRES_DEV_URL"
+    "ENV": "RENTO_POSTGRES_DEV_URL"
   },
   "test": {
-    "ENV": "SFC_POSTGRES_TEST_URL"
+    "ENV": "RENTO_POSTGRES_TEST_URL"
   },
   "production": {
-    "ENV": "SFC_DATABASE_URL"
+    "ENV": "RENTO_DATABASE_URL"
   },
   "sql-file": true
 }

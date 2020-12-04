@@ -4,8 +4,8 @@ services:
         env_file:
             - .env
         environment:
-           - SFC_POSTGRES_DEV_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/sfc_dev_db
-           - REDIS_URL=redis://cache_sfc
+           - RENTO_POSTGRES_DEV_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/rento
+           - REDIS_URL=redis://cache_rento
         build:
             context: .
             dockerfile: Dockerfile
@@ -29,4 +29,4 @@ services:
         image: postgres
     redis:
         image: "redis:alpine"
-        container_name: cache_sfc
+        container_name: cache_rento

@@ -1,4 +1,4 @@
-# SFC_API 
+# RENTO_API 
 
 [![Build Status](https://travis-ci.org/addempsea/streakforcash-api.svg?branch=master)](https://travis-ci.org/addempsea/streakforcash-api)
 

@@ -21,7 +21,7 @@
     "seed:up": "npm run migrate up:seeds",
     "seed:down": "npm run migrate down:seeds",
     "seed:reset": "npm run migrate reset:seeds",
-    "lint": "eslint --ext .js ./",
+    "lint": "eslint --ext .js ./ --fix",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "coverage": "nyc cat ./coverage/lcov.info | coveralls"
   },

@@ -2,10 +2,9 @@ import config from '../../config/env';
 
 const { RENTO_BASE_URL, NODE_ENV, PORT } = config;
 
-const BASE_URL =
-  NODE_ENV === 'production'
-    ? RENTO_BASE_URL
-    : `http://localhost:${PORT || 3000}`;
+const BASE_URL = NODE_ENV === 'production'
+  ? RENTO_BASE_URL
+  : `http://localhost:${PORT || 3000}`;
 
 export default {
   INTERNAL_SERVER_ERROR: 'Oops, something broke on the server!!!',

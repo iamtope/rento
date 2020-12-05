@@ -9,7 +9,6 @@ const { createUser } = queries;
  *  @class UserModel
  *
  */
-
 class UserModel {
   /**
    * This is a constructor for creating a User.
@@ -29,6 +28,12 @@ class UserModel {
     this.role = 'basic';
   }
 
+  /**
+   * Persists new Merchant to the database
+   * @memberof UserModel
+   * @returns { Promise<Object | Error> } A promise that resolves or rejects
+   * with a user object or database error
+   */
   async save() {
     try {
       return db.oneOrNone(createUser, [

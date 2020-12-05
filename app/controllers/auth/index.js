@@ -12,16 +12,15 @@ const { serverError } = genericErrors;
 /**
  * Contain several methods that authenticate user and the response they recieve
  */
-
 class AuthController {
   /**
    * Register user
    * @param {Request} req - The request sent from the endpoint.
    * @param {Response} res - The response returned by the method.
+   * @param {function} next - Calls the next handle.
    * @returns {JSON} A JSON response return by the function which includes user details and JWT
    * @memberof AuthController
    */
-
   static async signUpUser(req, res, next) {
     const { salt, hash } = Helper.hashPassword(req.body.password);
     try {
@@ -36,13 +35,16 @@ class AuthController {
       return next(errorResponse(req, res, serverError));
     }
   }
+
   /**
    * Login merchant on successful verification
-   * @param { Object } body - merchant payload
+   * @param {Object} req - The request from the endpoint.
+   * @param {Object} res - The response returned by the method.
+   * @param {function} next - Calls the next handle.
+   * @memberof AuthController
    * @returns { Promise< Error | Null > } A promise that resolves or rejects
    */
   static async loginUser(req, res, next) {
-    console.log('got here');
     const { user, password } = req.body;
     try {
       const isAuthenticated = Helper.compareHash(

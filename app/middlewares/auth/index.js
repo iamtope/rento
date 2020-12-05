@@ -14,7 +14,6 @@ const {
  * Contains several methods that validates the user
  *
  */
-
 class AuthMiddleWare {
   /**
    * Checks if their is user conflict in the database.
@@ -22,9 +21,9 @@ class AuthMiddleWare {
    * @param {Object} req - The request from the endpoint.
    * @param {Object} res - The response returned by the method.
    * @param {function} next - Calls the next handle.
-   * @returns {JSON / Null} - Returns error response or null if otherwise.
    * @memberof AuthMiddleWare.
-   *
+   * @returns { Promise<void> } A promise that resolves if the
+   * validation is successful or rejects if its wasn't.
    */
   static async checkIfUserAlreadyExist(req, res, next) {
     try {
@@ -48,8 +47,11 @@ class AuthMiddleWare {
 
   /**
    * Validates signup request
-   * @param { Object } body - payload of data to validate
-   * @param { Function } next - A function to be ran after validations
+   * @static
+   * @param {Object} req - The request from the endpoint.
+   * @param {Object} res - The response returned by the method.
+   * @param {function} next - Calls the next handle.
+   * @memberof AuthMiddleWare.
    * @returns { Promise<void> } A promise that resolves if the
    * validation is successful or rejects if its wasn't.
    */
@@ -64,13 +66,16 @@ class AuthMiddleWare {
       errorResponse(req, res, new ApiError({ message }));
     }
   }
+
   /**
    * Validates user's login credentials.
    * @static
-   * @param { Object } body - Payload of data to validate
-   * @param { function } next - Calls the next handle.
-   * @returns { JSON | Null } - Returns error response if validation fails or Null if otherwise.
-   * @memberof AuthMiddleware
+   * @param {Object} req - The request from the endpoint.
+   * @param {Object} res - The response returned by the method.
+   * @param {function} next - Calls the next handle.
+   * @memberof AuthMiddleWare.
+   * @returns { Promise<void> } A promise that resolves if the
+   * validation is successful or rejects if its wasn't.
    */
   static async validateLoginFields(req, res, next) {
     try {
@@ -90,9 +95,8 @@ class AuthMiddleWare {
    * @param {Object} req - The request from the endpoint.
    * @param {Object} res - The response returned by the method.
    * @param {function} next - Calls the next handle.
-   * @returns {JSON / Null} - Returns error response or null if otherwise.
-   * @memberof AuthMiddleWare.
-   *
+   * @returns { Promise<void> } A promise that resolves if the
+   * validation is successful or rejects if its wasn't.
    */
   static async fetchUserByEmail(req, res, next) {
     try {

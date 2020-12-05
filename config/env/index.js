@@ -3,16 +3,12 @@ import development from './development';
 import test from './test';
 import production from './production';
 
-const {
-  RENTO_SECRET: SECRET,
-  RENTO_NODE_ENV: NODE_ENV
-} = process.env;
+const { RENTO_SECRET: SECRET, RENTO_NODE_ENV: NODE_ENV } = process.env;
 
-console.log(process.env);
 const currentEnv = {
   development,
   test,
-  production
+  production,
 }[NODE_ENV || 'development'];
 
 export default {
@@ -20,5 +16,5 @@ export default {
   ...currentEnv,
   rootPath,
   SECRET,
-  NODE_ENV
+  NODE_ENV,
 };

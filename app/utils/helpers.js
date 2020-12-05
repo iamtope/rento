@@ -79,7 +79,7 @@ class Helper {
     const salt = bcrypt.genSaltSync(10);
     return {
       salt,
-      hash: Helper.generateHash(salt, plainPassword)
+      hash: Helper.generateHash(salt, plainPassword),
     };
   }
 
@@ -146,26 +146,23 @@ class Helper {
    * @memberof Helpers
    * @returns {object } - A new object containing essential user properties and jwt token.
    */
-  static addTokenToData(user, is_admin = false) {
-    const { id, facility_id, role, email, company_id } = user;
+  static addTokenToUser(user) {
+    const { id, first_name, last_name, email, role, phone_no } = user;
     const token = Helper.generateToken({
       id,
-      facility_id,
-      role,
+      first_name,
+      last_name,
       email,
-      is_admin,
-      company_id,
-      uptimaAdmin: !role && is_admin
+      role,
+      phone_no,
     });
     return {
       id,
-      first_name: user.first_name,
-      last_name: user.last_name,
-      facility_id,
-      role,
+      first_name,
+      last_name,
       email,
-      company_id,
-      token
+      role,
+      token,
     };
   }
 
@@ -190,7 +187,7 @@ class Helper {
   static makeError({ error, status }) {
     const dbError = new DBError({
       status,
-      message: error.message
+      message: error.message,
     });
     Helper.moduleErrLogMessager(dbError);
     return dbError;
@@ -214,7 +211,7 @@ class Helper {
     return res.status(code).json({
       status: SUCCESS,
       message,
-      data
+      data,
     });
   }
 
@@ -236,7 +233,7 @@ class Helper {
     return res.status(aggregateError.status).json({
       status: FAIL,
       message: aggregateError.message,
-      errors: aggregateError.errors
+      errors: aggregateError.errors,
     });
   }
 
@@ -285,7 +282,7 @@ class Helper {
     getCount,
     getResources,
     params = [],
-    countParams = []
+    countParams = [],
   }) {
     const offSet = (page - 1) * limit;
     const fetchCount = db.one(getCount, [...countParams]);

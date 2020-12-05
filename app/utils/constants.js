@@ -1,14 +1,11 @@
 import config from '../../config/env';
 
-const {
-  RENTO_BASE_URL,
-  NODE_ENV,
-  PORT
-} = config;
+const { RENTO_BASE_URL, NODE_ENV, PORT } = config;
 
-const BASE_URL = NODE_ENV === 'production'
-  ? RENTO_BASE_URL
-  : `http://localhost:${PORT || 3000}`;
+const BASE_URL =
+  NODE_ENV === 'production'
+    ? RENTO_BASE_URL
+    : `http://localhost:${PORT || 3000}`;
 
 export default {
   INTERNAL_SERVER_ERROR: 'Oops, something broke on the server!!!',
@@ -25,7 +22,7 @@ export default {
   events: {
     SEND_PASSWORD_TO_EMAIL: 'SEND_PASSWORD_TO_EMAIL',
     SEND_CONTACT_US_MSG: 'SEND_CONTACT_US_MSG',
-    SEND_FORGOT_PASSWORD_TO_EMAIL: 'SEND_FORGOT_PASSWORD_TO_EMAIL'
+    SEND_FORGOT_PASSWORD_TO_EMAIL: 'SEND_FORGOT_PASSWORD_TO_EMAIL',
   },
   ROLE_ARRAY: ['owner', 'manager', 'basic'],
   INVALID_ROLE_PARAMETER: 'Invalid role value',
@@ -91,5 +88,6 @@ export default {
   REDIS_RUNNING: 'Redis server is running',
   RENTO_RUNNING: 'RENTO is running on PORT',
   USERNAME_ERROR: 'Username registered already',
-  GENERIC_ERROR: 'Sorry, something went wrong'
+  GENERIC_ERROR: 'Sorry, something went wrong',
+  RESOURCE_NOT_EXISTS_IN_DB: 'User does not exists',
 };

@@ -8,4 +8,5 @@ export default {
      )
      RETURNING id, role, first_name, last_name, email, created_at, updated_at`,
   findUser: 'SELECT * FROM user_info WHERE email=$1',
+  getAllCategory: 'SELECT * FROM category'
 };

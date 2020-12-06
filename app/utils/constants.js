@@ -89,4 +89,5 @@ export default {
   USERNAME_ERROR: 'Username registered already',
   GENERIC_ERROR: 'Sorry, something went wrong',
   RESOURCE_NOT_EXISTS_IN_DB: 'User does not exists',
+  FETCH_CATEGORY_SUCCESSFUL: 'Fetched all categories sucessfully'
 };

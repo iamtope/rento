@@ -29,12 +29,12 @@ class UserModel {
   }
 
   /**
-   * Persists new Merchant to the database
+   * Persists new User to the database
    * @memberof UserModel
    * @returns { Promise<Object | Error> } A promise that resolves or rejects
    * with a user object or database error
    */
-  async save() {
+  async saveUser() {
     try {
       return db.oneOrNone(createUser, [
         this.first_name,
@@ -53,6 +53,28 @@ class UserModel {
 
       throw error;
     }
+  }
+
+  /**
+   * Persists new Merchant to the database
+   * @memberof MerchantModel
+   * @returns { Promise<Object | Error> } A promise that resolves or rejects
+   * with a Merchant object or database error
+   */
+  async save() {
+    logger.debug('Adding merchant data to database');
+    return db.tx(async (t) => {
+      const userInfo = await this.saveUser(t);
+      logger.debug('Merchant added successfully');
+      return {
+        userId: userInfo.id,
+        firstName: userInfo.first_name,
+        lastName: userInfo.last_name,
+        email: userInfo.email,
+        role: userInfo.role,
+        createdAt: userInfo.created_at
+      };
+    });
   }
 }
 

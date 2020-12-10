@@ -1,11 +1,18 @@
 import UserModel from '../../models/users';
 import { Helper, constants, genericErrors, ApiError } from '../../utils';
+import Job from '../../jobs';
 
 const {
   CREATE_USER_SUCCESSFULLY,
   INVALID_CREDENTIALS,
   LOGIN_USER_SUCCESSFULLY,
+  jobTypes
 } = constants;
+
+const {
+  SEND_VERIFICATION_EMAIL,
+} = jobTypes;
+
 const { successResponse, errorResponse } = Helper;
 const { serverError } = genericErrors;
 
@@ -26,6 +33,7 @@ class AuthController {
     try {
       const user = new UserModel({ ...req.body, salt, password: hash });
       const userDetails = await user.save();
+      Job.create({ type: SEND_VERIFICATION_EMAIL, data: userDetails });
       return successResponse(res, {
         code: 201,
         message: CREATE_USER_SUCCESSFULLY,

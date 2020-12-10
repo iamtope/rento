@@ -2,6 +2,7 @@
 import { sha256 } from 'js-sha256';
 import { v4 as uuidV4 } from 'uuid';
 import bcrypt from 'bcrypt';
+import crypto from 'crypto-random-string';
 import jwt from 'jsonwebtoken';
 import genericError from './error/generic';
 import config from '../../config/env';
@@ -301,6 +302,17 @@ class Helper {
   static calcPages(total, limit) {
     const displayPage = Math.floor(total / limit);
     return total % limit ? displayPage + 1 : displayPage;
+  }
+
+  /**
+   * Generate token for user verification
+   * @static
+   * @memberof Helper
+   * @returns {string} - Verification Token
+   */
+  static generateVerificationToken() {
+    const token = crypto({ length: 16, type: 'url-safe' });
+    return token;
   }
 }
 

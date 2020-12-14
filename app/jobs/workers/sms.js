@@ -1,5 +1,4 @@
-import phoneAuthentication from '../../utils/vonage/request'
-
+import phoneAuthentication from '../../utils/vonage/request';
 
 /**
  * A collection of worker methods tha handles event related to email.
@@ -17,7 +16,6 @@ class SMSWorker {
    * @returns { null } - It returns null.
    */
   static async send2FASMS({ data }, done) {
-      console.log('data is', data);
     try {
       await phoneAuthentication.phoneAuthentication(data);
       done();

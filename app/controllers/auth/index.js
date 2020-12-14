@@ -71,7 +71,7 @@ class AuthController {
           })
         );
       }
-      Job.create({ type: SEND_AUTHENTICATION_SMS, data: (user.phone_no)});
+      Job.create({ type: SEND_AUTHENTICATION_SMS, data: (user.phone_no) });
       const data = await Helper.addTokenToUser(user);
       return successResponse(res, {
         code: 200,

@@ -9,7 +9,7 @@ const {
   // sendApiKeyRequestMail
 } = EmailWorker;
 
-const { send2FASMS } = SMSWorker
+const { send2FASMS } = SMSWorker;
 
 const {
   SEND_VERIFICATION_EMAIL,

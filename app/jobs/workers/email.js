@@ -31,7 +31,6 @@ class EmailWorker {
   static async sendVerificationMail({ data }, done) {
     try {
       const token = generateVerificationToken();
-      console.log('data is', data);
       await saveUserVerificationToken(data.userId, token);
       await sendVerificationMail({ ...data, token });
       done();

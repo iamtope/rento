@@ -11,6 +11,7 @@ const {
 
 const {
   SEND_VERIFICATION_EMAIL,
+  SEND_AUTHENTICATION_SMS
 } = jobTypes;
 
 const { successResponse, errorResponse } = Helper;
@@ -70,6 +71,7 @@ class AuthController {
           })
         );
       }
+      Job.create({ type: SEND_AUTHENTICATION_SMS, data: (user.phone_no)});
       const data = await Helper.addTokenToUser(user);
       return successResponse(res, {
         code: 200,

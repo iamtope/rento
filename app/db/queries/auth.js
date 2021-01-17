@@ -3,8 +3,9 @@ export default {
     INTO
       activations(userid, token)
     VALUES
-      ($1, $2)
-    ON CONFLICT (userid)
-    DO
-    UPDATE SET token = EXCLUDED.token;`
+      ($1, $2)`,
+  updateUserVerificationStatus: `UPDATE 
+  users
+    SET
+  is_verified=$1 WHERE id=$2;`,
 };

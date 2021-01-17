@@ -8,8 +8,9 @@ const {
   validateSignupFields,
   validateLoginFields,
   fetchUserByEmail,
+  verifyUserToken
 } = AuthMiddleWare;
-const { signUpUser, loginUser } = AuthController;
+const { signUpUser, verifyUser, loginUser } = AuthController;
 const { fetchAllCategory } = UserController;
 
 const userRouter = Router();
@@ -21,6 +22,7 @@ userRouter.post(
   signUpUser
 );
 userRouter.post('/login', validateLoginFields, fetchUserByEmail, loginUser);
+userRouter.post('/verify', verifyUserToken, verifyUser);
 userRouter.get('/category', fetchAllCategory);
 
 export default userRouter;

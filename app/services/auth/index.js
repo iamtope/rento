@@ -15,11 +15,7 @@ class AuthService {
    * @returns { Promise< Error | Null > } A promise that resolves or rejects
    */
   static async saveUserVerificationToken(userId, token) {
-    try {
-      return db.none(queries.saveToken, [userId, token]);
-    } catch (error) {
-      throw Helper.processDBError(constants.SAVE_TOKEN_FAIL, error.message);
-    }
+    return db.none(queries.saveToken, [userId, token]);
   }
 
   /**
@@ -44,6 +40,15 @@ class AuthService {
    */
   static async updateUserVerificationToken(token, userId) {
     return db.none(queries.updateToken, [token, userId]);
+  }
+
+  /**
+   * updates a user verification status in the database to true
+   * @param { String } id - user id
+   * @returns { Promise< Error | Null > } A promise that resolves or rejects
+   */
+  static async updateUserVerificationStatus(id) {
+    return db.oneOrNone(queries.updateUserVerificationStatus, ['True', id]);
   }
 }
 

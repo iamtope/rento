@@ -16,7 +16,7 @@ class EmailGenerator {
     const mail = new Mailgen({
       theme: 'default',
       product: {
-        name: 'AQ',
+        name: 'Rentallpro',
         link: 'http://localhost:3000/api/v1',
       },
     });

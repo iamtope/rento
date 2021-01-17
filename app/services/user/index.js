@@ -1,7 +1,7 @@
 import queries from '../../db/queries/users';
 import Db from '../../db';
 
-const { findUser, getAllCategory } = queries;
+const { findUser, getAllCategory, findUserByToken } = queries;
 /**
  *  Contains several methods to manage user resorces
  *  @class UserServices
@@ -26,6 +26,15 @@ class UserService {
    */
   static async fetchAllCategory() {
     return Db.manyOrNone(getAllCategory, []);
+  }
+
+  /**
+   * find a user by  token in the database
+   * @param { String } token - token
+   * @returns { Promise< Error | Null > } A promise that resolves or rejects
+   */
+  static async findUserByToken(token) {
+    return Db.oneOrNone(findUserByToken, [token]);
   }
 }
 

@@ -7,7 +7,7 @@ const { errorResponse } = Helper;
 const {
   EMAIL_CONFLICT,
   INTERNAL_SERVER_ERROR,
-  RESOURCE_NOT_EXISTS_IN_DB,
+  TOKEN_NOT_EXIST,
 } = constants;
 
 /**
@@ -107,11 +107,45 @@ class AuthMiddleWare {
           res,
           new DBError({
             status: 400,
-            message: RESOURCE_NOT_EXISTS_IN_DB,
+            message: TOKEN_NOT_EXIST,
           })
         );
       }
       req.body.user = user;
+      next();
+    } catch (e) {
+      e.status = Helper.moduleErrLogMessager(e);
+      errorResponse(
+        req,
+        res,
+        new ApiError({ message: INTERNAL_SERVER_ERROR, status: 500 })
+      );
+    }
+  }
+
+  /**
+   * Check if a specific user token exists in the database
+   * @param {Object} req - The request from the endpoint.
+   * @param {Object} res - The response returned by the method.
+   * @param {function} next - Calls the next handle.
+   * @returns { Promise<void> } A promise that resolves if the
+   * validation is successful or rejects if unsuccessful.
+   */
+  static async verifyUserToken(req, res, next) {
+    try {
+      const { token } = req.body;
+      const data = await UserService.findUserByToken(token);
+      if (!data) {
+        return errorResponse(
+          req,
+          res,
+          new DBError({
+            status: 400,
+            message: TOKEN_NOT_EXIST
+          })
+        );
+      }
+      req.body.user = data;
       next();
     } catch (e) {
       e.status = Helper.moduleErrLogMessager(e);

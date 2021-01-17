@@ -34,7 +34,7 @@ class Email {
     const message = {
       to: options.email,
       from: RENTO_SENDGRID_EMAIL, // Use the email address or domain you verified above
-      subject: 'Welcome to RENTO, Verify Your Email to Get Started',
+      subject: 'Welcome to Rentallpro, Verify Your Email to Get Started',
       html: emailTemplate
     };
     return sgMail.send(message);

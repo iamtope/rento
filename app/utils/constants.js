@@ -100,5 +100,6 @@ export default {
   RESOURCE_NOT_EXISTS_IN_DB: 'User does not exists',
   FETCH_CATEGORY_SUCCESSFUL: 'Fetched all categories sucessfully',
   SAVE_TOKEN_FAIL: 'SAVE_VERIFICATION_TOKEN_FAIL',
-  RENTALLPRO_BRAND_NAME: 'Rentallpro'
+  RENTALLPRO_BRAND_NAME: 'Rentallpro',
+  TOKEN_NOT_EXIST: 'Token does not exist or expired'
 };

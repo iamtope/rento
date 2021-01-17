@@ -1,5 +1,6 @@
 import UserModel from '../../models/users';
 import { Helper, constants, genericErrors, ApiError } from '../../utils';
+import AuthService from '../../services/auth';
 import Job from '../../jobs';
 
 const {
@@ -16,6 +17,7 @@ const {
 
 const { successResponse, errorResponse } = Helper;
 const { serverError } = genericErrors;
+const { updateUserVerificationStatus } = AuthService;
 
 /**
  * Contain several methods that authenticate user and the response they recieve
@@ -41,6 +43,24 @@ class AuthController {
         data: userDetails,
       });
     } catch (e) {
+      return next(errorResponse(req, res, serverError));
+    }
+  }
+
+  /**
+   * Verify user after signup
+      * @param {Request} req - The request sent from the endpoint.
+   * @param {Response} res - The response returned by the method.
+   * @param {function} next - Calls the next handle.
+   * @returns {JSON} A JSON response return by the functio
+   * @returns { Promise< Error | Null > } A promise that resolves or rejects
+   */
+  static async verifyUser(req, res, next) {
+    const { user } = req.body;
+    try {
+      await updateUserVerificationStatus(user.userid);
+      return {};
+    } catch (err) {
       return next(errorResponse(req, res, serverError));
     }
   }
